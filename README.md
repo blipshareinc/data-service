@@ -6,7 +6,7 @@ Project for data storage and retrieval for <b>Home Automation</b> project.
 This project can be run in one of two modes.
 
 ## 1. Local Mode
-Leverages SQLite database to perform CRUD operations on data received from other services. Everything will be stored locally (on-premise) and no data will be send or processed externally.
+Leverages SQLite database to perform CRUD operations on data received from other services. Everything will be stored locally (on-premise) and no data will be send or processed externally. [Read More](./local/README.md)
 <p>
 Status: <span style="color:orange">In Progress</span>
 </p>
