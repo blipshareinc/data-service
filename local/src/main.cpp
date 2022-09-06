@@ -9,6 +9,8 @@
 
 #include "web/app_component.hpp"
 #include "controller/controller.hpp"
+#include "controller/user_controller.hpp"
+#include "controller/tts_controller.hpp"
 
 auto run() -> void
 {
@@ -23,7 +25,13 @@ auto run() -> void
 
     // create controller and all of its endpoints to router
     auto controller = std::make_shared<data_service::RESTApiController>();
+    auto user_controller = std::make_shared<data_service::UserController>();
+    auto tts_controller = std::make_shared<data_service::TtsController>();
+
     doc_end_points.append(router->addController(controller)->getEndpoints());
+    doc_end_points.append(router->addController(user_controller)->getEndpoints());
+    doc_end_points.append(router->addController(tts_controller)->getEndpoints());
+
     router->addController(oatpp::swagger::Controller::createShared(doc_end_points));
 
     // get Http connection handler
@@ -36,7 +44,7 @@ auto run() -> void
     auto server = oatpp::network::Server(conn_provider, conn_handler);
 
     // print server info
-    OATPP_LOGI("DataStorage", "Server running on port %s", conn_provider->getProperty("port").getData());
+    OATPP_LOGI("DataService", "Server running on port %s", conn_provider->getProperty("port").getData());
 
     // run the server
     server.run();

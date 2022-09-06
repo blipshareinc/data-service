@@ -4,11 +4,14 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(SOURCE_FILES
     controller/controller.hpp
-    db/sqlite3_client.hpp
+    controller/user_controller.hpp
+    db/user_client.hpp
+    db/tts_client.hpp
     web/dto/user_dto.hpp
     web/dto/page_dto.hpp
     web/dto/status_dto.hpp
-    service/user_service.cpp
+    service/user/user_service.cpp
+    service/tts/tts_service.cpp
     web/app_component.hpp
 )
 
