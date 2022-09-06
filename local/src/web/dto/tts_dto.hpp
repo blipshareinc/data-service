@@ -11,8 +11,8 @@ class TtsDTO : public oatpp::DTO
 {
     DTO_INIT(TtsDTO, DTO)
 
-    DTO_FIELD(String, id,               "id");
-    DTO_FIELD(String, user,             "user");
+    DTO_FIELD(UInt32, tts_id,           "tts_id");
+    DTO_FIELD(UInt32, user_id,          "user_id");
     DTO_FIELD(String, text,             "text");
     DTO_FIELD(String, audio_file_name,  "audio_file_name");
 };

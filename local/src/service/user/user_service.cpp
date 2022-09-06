@@ -67,7 +67,7 @@ oatpp::Object<StatusDTO> UserService::deleteUserById(
     auto status = StatusDTO::createShared();
     status->status = "OK";
     status->code = 200;
-    status->message = fmt::format("User with email '{}' was successfully deleted.", id);
+    status->message = fmt::format("User with id '{}' was successfully deleted.", id);
     return status;
 }
 

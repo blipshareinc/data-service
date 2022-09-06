@@ -36,6 +36,52 @@ public:
       return createDtoResponse(Status::CODE_200, tts_service_.getAllTtsData(offset, limit));
   }
 
+  ENDPOINT_INFO(getTtsById)
+  {
+      info->summary = "Get TTS By Id";
+      info->addResponse<Object<TtsDTO>>(Status::CODE_200, "application/json");
+      info->addResponse<Object<StatusDTO>>(Status::CODE_400, "application/json");
+      info->addResponse<Object<StatusDTO>>(Status::CODE_500, "application/json");
+  }
+  ENDPOINT("GET",
+      "tts/get_tts/{id}",
+      getTtsById,
+      PATH(UInt32, id))
+  {
+      return createDtoResponse(Status::CODE_200, tts_service_.getTtsById(id));
+  }
+
+  ENDPOINT_INFO(createTts)
+  {
+      info->summary = "Create New TTS";
+      info->addConsumes<Object<TtsDTO>>("application/json");
+      info->addResponse<Object<TtsDTO>>(Status::CODE_200, "application/json");
+      info->addResponse<Object<StatusDTO>>(Status::CODE_400, "application/json");
+      info->addResponse<Object<StatusDTO>>(Status::CODE_500, "application/json");
+  }
+  ENDPOINT("POST",
+      "tts/create_tts",
+      createTts,
+      BODY_DTO(Object<TtsDTO>, ttsDTO))
+  {
+      return createDtoResponse(Status::CODE_200, tts_service_.createTts(ttsDTO));
+  }
+
+  ENDPOINT_INFO(deleteTtsById)
+  {
+      info->summary = "Delete Existing TTS by Id";
+      info->addResponse<Object<UserDTO>>(Status::CODE_200, "application/json");
+      info->addResponse<Object<StatusDTO>>(Status::CODE_400, "application/json");
+      info->addResponse<Object<StatusDTO>>(Status::CODE_500, "application/json");
+  }
+  ENDPOINT("DELETE",
+      "tts/delete_tts/{id}",
+      deleteTtsById,
+      PATH(UInt32, id))
+  {
+      return createDtoResponse(Status::CODE_200, tts_service_.deleteTtsById(id));
+  }
+
   static std::shared_ptr<TtsController> createShared(
     OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper)) // Inject objectMapper component here as default parameter
   {
