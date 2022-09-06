@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.24.1)
-project(DataStorage VERSION 1.0.0 LANGUAGES CXX C)
+project(DataService VERSION 1.0.0 LANGUAGES CXX C)
 
 set(LIB /usr/local/lib64)
 

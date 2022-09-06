@@ -11,7 +11,8 @@
 
 #include <fmt/core.h>
 
-#include "db/sqlite3_client.hpp"
+#include "db/user_client.hpp"
+#include "db/tts_client.hpp"
 
 namespace data_service
 {
@@ -73,10 +74,10 @@ public:
     }());
 
     /**
-     * @brief Create Database client
+     * @brief Create Database client for User
      * 
      */
-    OATPP_CREATE_COMPONENT(std::shared_ptr<data_service::db::sqlite3_client>, database_client)([] {
+    OATPP_CREATE_COMPONENT(std::shared_ptr<data_service::db::user_client>, user_database_client)([] {
 
         // get database connection provider
         OATPP_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::sqlite::Connection>>, connection_provider);
@@ -85,7 +86,23 @@ public:
         auto executor = std::make_shared<oatpp::sqlite::Executor>(connection_provider);
 
         // create database client
-        return std::make_shared<data_service::db::sqlite3_client>(executor);
+        return std::make_shared<data_service::db::user_client>(executor);
+    }());
+
+    /**
+     * @brief Create Database client for TTS
+     * 
+     */
+    OATPP_CREATE_COMPONENT(std::shared_ptr<data_service::db::tts_client>, tts_database_client)([] {
+
+        // get database connection provider
+        OATPP_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::sqlite::Connection>>, connection_provider);
+
+        // create database specific executor
+        auto executor = std::make_shared<oatpp::sqlite::Executor>(connection_provider);
+
+        // create database client
+        return std::make_shared<data_service::db::tts_client>(executor);
     }());
 
     /**
@@ -96,7 +113,7 @@ public:
         oatpp::swagger::DocumentInfo::Builder builder;
 
         builder
-            .setTitle("Available Endpoints")
+            .setTitle("Data Service Available Endpoints")
             .setDescription("APIs with swagger docs")
             .setVersion("1.0")
             .setContactName("BLIPShare")

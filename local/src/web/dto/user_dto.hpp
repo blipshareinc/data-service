@@ -7,12 +7,21 @@
 
 namespace data_service
 {
+
+ENUM(Role_Type, v_int32,
+     VALUE(ADMIN, 0, "ROLE_ADMIN"),
+     VALUE(USER,  1, "ROLE_USER")
+)
+
 class UserDTO : public oatpp::DTO
 {
     DTO_INIT(UserDTO, DTO)
 
-    DTO_FIELD(String, id,   "id");
-    DTO_FIELD(String, name, "name");
+    DTO_FIELD(UInt32, user_id,    "user_id");
+    DTO_FIELD(String, email,      "email");
+    DTO_FIELD(String, first_name, "first_name");
+    DTO_FIELD(String, last_name,  "last_name");
+    DTO_FIELD(Enum<Role_Type>::AsNumber, role_type,  "role_type");
 };
 }
 
