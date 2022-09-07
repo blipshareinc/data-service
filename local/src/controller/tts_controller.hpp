@@ -62,15 +62,14 @@ public:
   ENDPOINT("POST",
       "tts/create_tts",
       createTts,
-      BODY_DTO(Object<TtsDTO>, ttsDTO))
+      BODY_DTO(Object<TtsDTO>, dto))
   {
-      return createDtoResponse(Status::CODE_200, tts_service_.createTts(ttsDTO));
+      return createDtoResponse(Status::CODE_200, tts_service_.createTts(dto));
   }
 
   ENDPOINT_INFO(deleteTtsById)
   {
       info->summary = "Delete Existing TTS by Id";
-      info->addResponse<Object<UserDTO>>(Status::CODE_200, "application/json");
       info->addResponse<Object<StatusDTO>>(Status::CODE_400, "application/json");
       info->addResponse<Object<StatusDTO>>(Status::CODE_500, "application/json");
   }

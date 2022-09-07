@@ -69,7 +69,6 @@ public:
   ENDPOINT_INFO(deleteUserById)
   {
       info->summary = "Delete Existing User by Id";
-      info->addResponse<Object<UserDTO>>(Status::CODE_200, "application/json");
       info->addResponse<Object<StatusDTO>>(Status::CODE_400, "application/json");
       info->addResponse<Object<StatusDTO>>(Status::CODE_500, "application/json");
   }

@@ -25,7 +25,7 @@ public:
         const oatpp::provider::ResourceHandle<oatpp::orm::Connection>& connection=nullptr);
 
     oatpp::Object<TtsDTO> createTts(
-        const oatpp::Object<TtsDTO>& ttsDTO);
+        const oatpp::Object<TtsDTO>& dto);
 
     oatpp::Object<StatusDTO> deleteTtsById(
         oatpp::UInt32 id);
