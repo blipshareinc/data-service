@@ -46,9 +46,9 @@ oatpp::Object<TtsDTO> TtsService::getTtsById(
 }
 
 oatpp::Object<TtsDTO> TtsService::createTts(
-    const oatpp::Object<TtsDTO>& ttsDTO)
+    const oatpp::Object<TtsDTO>& dto)
 {
-    auto db_result = db_client_->createTts(ttsDTO);
+    auto db_result = db_client_->createTts(dto);
     OATPP_ASSERT_HTTP(db_result->isSuccess(), Status::CODE_500, db_result->getErrorMessage());
 
     auto row_id = oatpp::sqlite::Utils::getLastInsertRowId(db_result->getConnection());
