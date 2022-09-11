@@ -13,6 +13,7 @@
 
 #include "db/user_client.hpp"
 #include "db/tts_client.hpp"
+#include "db/notification_client.hpp"
 
 namespace data_service
 {
@@ -103,6 +104,22 @@ public:
 
         // create database client
         return std::make_shared<data_service::db::tts_client>(executor);
+    }());
+
+    /**
+     * @brief Create Database client for TTS
+     * 
+     */
+    OATPP_CREATE_COMPONENT(std::shared_ptr<data_service::db::notification_client>, notification_database_client)([] {
+
+        // get database connection provider
+        OATPP_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::sqlite::Connection>>, connection_provider);
+
+        // create database specific executor
+        auto executor = std::make_shared<oatpp::sqlite::Executor>(connection_provider);
+
+        // create database client
+        return std::make_shared<data_service::db::notification_client>(executor);
     }());
 
     /**
