@@ -11,6 +11,7 @@
 #include "controller/controller.hpp"
 #include "controller/user_controller.hpp"
 #include "controller/tts_controller.hpp"
+#include "controller/notification_controller.hpp"
 
 auto run() -> void
 {
@@ -24,13 +25,15 @@ auto run() -> void
     oatpp::web::server::api::Endpoints doc_end_points;
 
     // create controller and all of its endpoints to router
-    auto controller = std::make_shared<data_service::RESTApiController>();
-    auto user_controller = std::make_shared<data_service::UserController>();
-    auto tts_controller = std::make_shared<data_service::TtsController>();
+    auto controller              = std::make_shared<data_service::RESTApiController>();
+    auto user_controller         = std::make_shared<data_service::UserController>();
+    auto tts_controller          = std::make_shared<data_service::TtsController>();
+    auto notification_controller = std::make_shared<data_service::NotificationController>();
 
     doc_end_points.append(router->addController(controller)->getEndpoints());
     doc_end_points.append(router->addController(user_controller)->getEndpoints());
     doc_end_points.append(router->addController(tts_controller)->getEndpoints());
+    doc_end_points.append(router->addController(notification_controller)->getEndpoints());
 
     router->addController(oatpp::swagger::Controller::createShared(doc_end_points));
 
