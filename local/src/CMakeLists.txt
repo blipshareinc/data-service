@@ -7,11 +7,14 @@ set(SOURCE_FILES
     controller/user_controller.hpp
     db/user_client.hpp
     db/tts_client.hpp
+    db/notification_client.hpp
     web/dto/user_dto.hpp
     web/dto/page_dto.hpp
     web/dto/status_dto.hpp
+    web/dto/notification_dto.hpp
     service/user/user_service.cpp
     service/tts/tts_service.cpp
+    service/notification/notification_service.cpp
     web/app_component.hpp
 )
 

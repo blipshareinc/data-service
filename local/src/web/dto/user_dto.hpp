@@ -8,7 +8,7 @@
 namespace data_service
 {
 
-ENUM(Role_Type, v_int32,
+ENUM(Role_Type, v_int8,
      VALUE(ADMIN, 0, "ROLE_ADMIN"),
      VALUE(USER,  1, "ROLE_USER")
 )
