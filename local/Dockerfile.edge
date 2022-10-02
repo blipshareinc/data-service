@@ -1,7 +1,7 @@
 FROM alpine:edge
 
 RUN apk update && \
-    apk add curl cmake make ninja g++ sqlite sqlite-dev
+    apk add curl cmake make ninja g++ sqlite sqlite-dev git
 
 COPY . /app
 
