@@ -27,8 +27,8 @@ set(OATPP_LIB_DIR /usr/local/lib/oatpp-1.3.0/)
 set(FMT_INCLUDE_DIR /usr/local/include/fmt)
 
 add_definitions(
-    -DSERVER_NAME="localhost"
-    -DSERVER_ADDRESS="http://localhost"
+    -DSERVER_NAME="0.0.0.0"
+    -DSERVER_ADDRESS="http://0.0.0.0"
     -DSERVER_PORT=11002
     -DOATPP_SWAGGER_RES_PATH="${OATPP_BASE_DIR}/bin/oatpp-swagger/res"
     -DDATABASE_FILE="${CMAKE_SOURCE_DIR}/db/local.db"
