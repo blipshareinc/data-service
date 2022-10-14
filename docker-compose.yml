@@ -1,9 +1,0 @@
-version: "3.9"
-services:
-  local_data_service:
-    image: local_data_service:latest
-    build: ./local
-    container_name: local-data-service
-    volumes:
-      - ./local/db:/app/db
-    network_mode: "host"
