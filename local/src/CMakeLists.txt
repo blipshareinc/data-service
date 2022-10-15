@@ -18,13 +18,28 @@ set(SOURCE_FILES
     web/app_component.hpp
 )
 
-set(OATPP_LIB_DIR /usr/local/lib/oatpp-1.3.0)
-set(OATPP_BASE_DIR /usr/local/include/oatpp-1.3.0)
-set(OATPP_INCLUDE_DIR ${OATPP_BASE_DIR}/oatpp/)
-set(OATPP_SQLITE_INCLUDE_DIR ${OATPP_BASE_DIR}/oatpp-sqlite/)
-set(OATPP_SWAGGER_INCLUDE_DIR ${OATPP_BASE_DIR}/oatpp-swagger/)
-set(OATPP_LIB_DIR /usr/local/lib/oatpp-1.3.0/)
-set(FMT_INCLUDE_DIR /usr/local/include/fmt)
+option(ARM32V7 "Architecture is ARM32v7" OFF)
+
+if (ARM32V7)
+    message("Building for Arm32v7 architecture")
+    set(OATPP_LIB_DIR /usr/local/lib/oatpp-1.3.0)
+    set(OATPP_BASE_DIR /usr/local/include/oatpp-1.3.0)
+    set(OATPP_INCLUDE_DIR ${OATPP_BASE_DIR}/oatpp/)
+    set(OATPP_SQLITE_INCLUDE_DIR ${OATPP_BASE_DIR}/oatpp-sqlite/)
+    set(OATPP_SWAGGER_INCLUDE_DIR ${OATPP_BASE_DIR}/oatpp-swagger/)
+    set(OATPP_LIB_DIR /usr/local/lib/oatpp-1.3.0/)
+    set(FMT_INCLUDE_DIR /usr/local/include/fmt)
+else()
+    message("Building for Arch64 architecture")
+    set(VCPKG_INCLUDE_DIR ${VCPKG_DIR}/include)
+    set(VCPKG_LIB_DIR ${VCPKG_DIR}/lib)
+    set(OATPP_DIR ${VCPKG_INCLUDE_DIR}/oatpp-1.3.0)
+    set(OATPP_INCLUDE_DIR ${OATPP_DIR}/oatpp/)
+    set(OATPP_SQLITE_INCLUDE_DIR ${OATPP_DIR}/oatpp-sqlite/)
+    set(OATPP_SWAGGER_INCLUDE_DIR ${OATPP_DIR}/oatpp-swagger/)
+    set(OATPP_LIB_DIR ${VCPKG_LIB_DIR}/oatpp-1.3.0/)
+    set(FMT_INCLUDE_DIR ${VCPKG__LIB_DIR}/include/fmt)
+endif()
 
 add_definitions(
     -DSERVER_NAME="0.0.0.0"
@@ -61,6 +76,17 @@ target_link_libraries(data_service LINK_PUBLIC data_service_lib)
 target_link_directories(data_service
     PRIVATE
     ${OATPP_LIB_DIR})
+
+if(NOT ARM32V7)
+    target_include_directories(data_service_lib
+    PUBLIC
+    ${VCPKG_INCLUDE_DIR})
+
+    target_link_directories(data_service
+        PRIVATE
+        ${VCPKG_LIB_DIR})
+endif()
+
 
 target_link_libraries(data_service
     PUBLIC

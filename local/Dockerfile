@@ -8,7 +8,7 @@ COPY . /app
 WORKDIR /app
 
 RUN mkdir build && \
-    cmake -B ./build -S . -GNinja -DCMAKE_CXX_COMPILER=g++ -DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake && \
+    cmake -B ./build -S . -GNinja -DCMAKE_CXX_COMPILER=g++ -DARM32V7=OFF -DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake && \
     cmake --build build
 
 EXPOSE 11002
