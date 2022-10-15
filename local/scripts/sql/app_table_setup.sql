@@ -1,0 +1,6 @@
+CREATE TABLE app (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    enabled INTEGER NOT NULL,
+    url TEXT NOT NULL
+);

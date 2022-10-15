@@ -12,6 +12,7 @@
 #include "controller/user_controller.hpp"
 #include "controller/tts_controller.hpp"
 #include "controller/notification_controller.hpp"
+#include "controller/app_controller.hpp"
 
 auto run() -> void
 {
@@ -29,11 +30,13 @@ auto run() -> void
     auto user_controller         = std::make_shared<data_service::UserController>();
     auto tts_controller          = std::make_shared<data_service::TtsController>();
     auto notification_controller = std::make_shared<data_service::NotificationController>();
+    auto app_controller          = std::make_shared<data_service::AppController>();
 
     doc_end_points.append(router->addController(controller)->getEndpoints());
     doc_end_points.append(router->addController(user_controller)->getEndpoints());
     doc_end_points.append(router->addController(tts_controller)->getEndpoints());
     doc_end_points.append(router->addController(notification_controller)->getEndpoints());
+    doc_end_points.append(router->addController(app_controller)->getEndpoints());
 
     router->addController(oatpp::swagger::Controller::createShared(doc_end_points));
 
@@ -60,11 +63,6 @@ auto run() -> void
  */
 int main(int argc, char* argv[])
 {
-    //const auto db_path = "/home/pgiri/Documents/Development/oatpp/db/test.db";
-    //sqlite3_client db_client = sqlite3_client(db_path);
-    //auto query = "SELECT * FROM users";
-    //db_client.execute_query(query);
-
     // initialize oatpp environment
     oatpp::base::Environment::init();
 
