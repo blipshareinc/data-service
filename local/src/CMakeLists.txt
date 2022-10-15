@@ -18,10 +18,8 @@ set(SOURCE_FILES
     web/app_component.hpp
 )
 
-option(ARM32V7 "Architecture is ARM32v7" OFF)
 
 if (ARM32V7)
-    message("Building for Arm32v7 architecture")
     set(OATPP_LIB_DIR /usr/local/lib/oatpp-1.3.0)
     set(OATPP_BASE_DIR /usr/local/include/oatpp-1.3.0)
     set(OATPP_INCLUDE_DIR ${OATPP_BASE_DIR}/oatpp/)
@@ -30,7 +28,6 @@ if (ARM32V7)
     set(OATPP_LIB_DIR /usr/local/lib/oatpp-1.3.0/)
     set(FMT_INCLUDE_DIR /usr/local/include/fmt)
 else()
-    message("Building for Arch64 architecture")
     set(VCPKG_INCLUDE_DIR ${VCPKG_DIR}/include)
     set(VCPKG_LIB_DIR ${VCPKG_DIR}/lib)
     set(OATPP_DIR ${VCPKG_INCLUDE_DIR}/oatpp-1.3.0)
