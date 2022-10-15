@@ -137,7 +137,7 @@ public:
             .setContactUrl("https://www.blipshare.com")
             .setLicenseName("Apache License, Version 2.0")
             .setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0")
-            .addServer(fmt::format("{}:{}", SERVER_ADDRESS, SERVER_PORT), "server on localhost");
+            .addServer(fmt::format("{}:{}", SERVER_ADDRESS, SERVER_PORT), "server on 0.0.0.0");
 
         return builder.build();
     }());
